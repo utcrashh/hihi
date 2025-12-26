@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Asmi 🧸</title>
+
+  <!-- Cute rounded font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#fff6ee;
+      --bg2:#fde2e4;
+      --card:#ffffffee;
+      --text:#3a2f2f;
+      --muted:#7a6a6a;
+      --accent:#f4a261;
+      --accent2:#e76f51;
+      --ok:#8ecae6;
+      --warn:#ffb703;
+      --shadow: 0 18px 40px rgba(0,0,0,.12);
+      --radius: 26px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      font-family: "Quicksand", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(600px 400px at 15% 10%, #fff1c1, transparent 60%),
+        radial-gradient(500px 350px at 85% 20%, #cdb4db, transparent 55%),
+        radial-gradient(400px 300px at 50% 90%, #bde0fe, transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:flex; align-items:center; justify-content:center;
+      padding:22px;
+    }
+    .wrap{width:min(980px, 100%);}
+    .top{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+      margin-bottom:14px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; user-select:none;}
+    .logo{
+      width:44px; height:44px; border-radius:16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      font-weight:900; font-size:20px;
+    }
+    .subtitle{color:var(--muted); font-size:14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+    .bears{display:inline-flex; gap:6px; align-items:center;}
+    .bears span{
+      display:inline-grid; place-items:center;
+      width:28px; height:28px;
+      border-radius:12px;
+      background:#fff;
+      border:2px solid #f1e3d3;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+      font-size:16px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background:#ffffffb8; border:2px solid #f1e3d3;
+      color:var(--muted); font-size:13px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    }
+
+    .card{
+      background: var(--card);
+      border: 2px solid #f1e3d3;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+    .tabs{
+      display:flex;
+      background:#fffaf5;
+      border-bottom:2px solid #f1e3d3;
+    }
+    .tab{
+      flex:1;
+      padding:14px 16px;
+      cursor:pointer;
+      text-align:center;
+      font-weight:800;
+      color:var(--muted);
+      transition:.2s;
+      position:relative;
+    }
+    .tab.active{
+      color:var(--text);
+      background: linear-gradient(180deg, #fff3e6, transparent);
+    }
+    .tab.active::after{
+      content:"";
+      position:absolute; left:18px; right:18px; bottom:8px;
+      height:4px; border-radius:999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .content{padding:20px;}
+    h1{margin:6px 0 8px; font-size:30px;}
+    p{margin:8px 0; color:var(--muted); line-height:1.6;}
+    .row{display:grid; gap:16px; grid-template-columns: 1.25fr .75fr;}
+    @media (max-width: 860px){ .row{grid-template-columns:1fr;} }
+
+    .panel{
+      border:2px dashed #f3d5b5;
+      background:#fffaf5;
+      border-radius:22px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .stickers{
+      position:absolute; inset:-40px -40px auto auto;
+      width:220px; height:220px;
+      background:
+        radial-gradient(circle at 30% 30%, #ffd6a5, transparent 55%),
+        radial-gradient(circle at 70% 45%, #bde0fe, transparent 55%),
+        radial-gradient(circle at 50% 75%, #cdb4db, transparent 55%);
+      filter: blur(1px);
+      opacity:.55;
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .stickers2{
+      position:absolute; inset:auto auto -60px -60px;
+      width:240px; height:240px;
+      background:
+        radial-gradient(circle at 40% 40%, #d8f3dc, transparent 55%),
+        radial-gradient(circle at 65% 55%, #fde2e4, transparent 55%),
+        radial-gradient(circle at 45% 70%, #fff1c1, transparent 55%);
+      filter: blur(1px);
+      opacity:.6;
+      transform: rotate(-8deg);
+      pointer-events:none;
+    }
+
+    .typebox{
+      font-size:16.5px;
+      background:#ffffff;
+      border:2px solid #f1e3d3;
+      border-radius:18px;
+      padding:14px;
+      min-height:140px;
+      color:var(--text);
+      box-shadow: 0 10px 20px rgba(0,0,0,.06);
+    }
+    .cursor{
+      display:inline-block;
+      width:10px;
+      animation: blink 1s infinite;
+      color:var(--accent2);
+      font-weight:900;
+    }
+    @keyframes blink{ 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+    .input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:16px;
+      border:2px solid #f1e3d3;
+      background:#ffffff;
+      color:var(--text);
+      outline:none;
+      margin-top:8px;
+      font-weight:650;
+      font-family: inherit;
+    }
+    textarea.input{resize:vertical; min-height:92px;}
+
+    .small{font-size:12.5px; color:var(--muted)}
+    .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; align-items:center;}
+    button{
+      border:0;
+      cursor:pointer;
+      padding:12px 16px;
+      border-radius:18px;
+      font-weight:900;
+      letter-spacing:.2px;
+      transition:.15s transform, .15s box-shadow, .15s opacity;
+      box-shadow: 0 10px 20px rgba(0,0,0,.08);
+      font-family: inherit;
+    }
+    button:hover{transform: translateY(-1px);}
+    button:active{transform: scale(.98);}
+    button:disabled{opacity:.6; cursor:not-allowed; transform:none;}
+    .primary{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color:#3a2f2f;
+      box-shadow: 0 12px 24px rgba(244,162,97,.35);
+    }
+    .ghost{
+      background:#ffffff;
+      color:var(--text);
+      border:2px solid #f1e3d3;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    }
+    .tiny{
+      background:transparent; color:var(--muted);
+      border:2px dashed #f3d5b5;
+      box-shadow:none;
+      padding:11px 14px;
+    }
+    .ok{ background: linear-gradient(90deg, var(--ok), #c7f9ff); color:#1f2a32; }
+    .warn{ background: linear-gradient(90deg, var(--warn), #ffe69a); color:#3a2f2f; }
+
+    .toast{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:2px solid #f1e3d3;
+      background:#ffffff;
+      color:var(--text);
+      display:none;
+      font-weight:750;
+      box-shadow: 0 10px 20px rgba(0,0,0,.06);
+      white-space:pre-wrap;
+    }
+    .toast.show{display:block;}
+
+    hr{border:0; border-top:2px dashed #f3d5b5; margin:16px 0;}
+    .footer{
+      margin-top:14px;
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+      color:var(--muted); font-size:12.5px;
+    }
+    .linklike{color:#3a2f2f; text-decoration:underline; cursor:pointer; font-weight:800;}
+
+    /* Hug meter */
+    .meter-wrap{
+      margin-top:10px;
+      padding:12px;
+      border-radius:18px;
+      border:2px solid #f1e3d3;
+      background:#ffffff;
+      box-shadow: 0 10px 20px rgba(0,0,0,.06);
+    }
+    .meter-top{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      font-weight:900;
+    }
+    .meter-num{
+      padding:6px 10px;
+      border-radius:999px;
+      border:2px solid #f1e3d3;
+      background:#fffaf5;
+      font-size:13px;
+      color:var(--text);
+      white-space:nowrap;
+    }
+    input[type="range"]{
+      width:100%;
+      margin-top:10px;
+      accent-color: var(--accent2);
+      cursor:pointer;
+    }
+    .meter-hint{
+      margin-top:8px;
+      font-size:12.5px;
+      color:var(--muted);
+      font-weight:800;
+    }
+
+    /* Confetti */
+    .confetti{
+      position:fixed;
+      width:10px; height:14px;
+      border-radius:4px;
+      pointer-events:none;
+      z-index:9999;
+      animation: pop 900ms ease-out forwards;
+      opacity:.95;
+    }
+    @keyframes pop{
+      0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+      100% { transform: translate(var(--dx), var(--dy)) rotate(260deg) scale(.9); opacity:0; }
+    }
+
+    /* Music Toggle */
+    #musicToggle{
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      border: 2px solid #f1e3d3;
+      background: #ffffff;
+      box-shadow: 0 10px 20px rgba(0,0,0,.12);
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 9999;
+      user-select:none;
+      transition: transform .15s ease;
+    }
+    #musicToggle:hover{ transform: translateY(-2px); }
+    #musicToggle:active{ transform: scale(.98); }
+
+    /* End overlay */
+    .end-overlay{
+      position:fixed; inset:0;
+      background: rgba(255, 246, 238, .55);
+      backdrop-filter: blur(6px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:10000;
+    }
+    .end-overlay.show{ display:flex; }
+    .end-card{
+      width:min(560px, 100%);
+      border-radius: 26px;
+      border:2px solid #f1e3d3;
+      background:#ffffff;
+      box-shadow: var(--shadow);
+      padding:20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .end-title{
+      font-size:22px;
+      font-weight:950;
+      margin:0 0 6px;
+    }
+    .end-text{
+      margin:0;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.6;
+    }
+
+    /* Confirm stamp */
+    .stamp{
+      display:none;
+      margin-top:10px;
+    }
+    .stamp .pill{
+      font-weight:950;
+      color:var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" id="logo">🐻</div>
+        <div>
+          <div style="font-weight:950; letter-spacing:.2px;">For Asmi 🧸</div>
+          <div class="subtitle">
+            for you, amuu 🤍
+            <span class="bears" aria-label="we bare bears">
+              <span title="Grizz">🐻</span><span title="Panda">🐼</span><span title="Ice Bear">🐻‍❄️</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="pill">made with 💖 + courage</div>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <div class="tab active" data-tab="sorry">🐼 1) I’m Sorry</div>
+        <div class="tab" data-tab="date">🐻‍❄️ 2) Date</div>
+      </div>
+
+      <div class="content">
+        <!-- TAB: SORRY -->
+        <section id="tab-sorry">
+          <div class="row">
+            <div class="panel">
+              <div class="stickers"></div>
+              <div class="stickers2"></div>
+
+              <div class="pill">💌</div>
+              <h1>Hey Amuu…</h1>
+
+              <div class="typebox" id="typebox"></div>
+
+              <div class="btns">
+                <button class="primary" id="playSorry">Read it 🧸</button>
+                <button class="ghost" id="copySorry">Copy 💌</button>
+              </div>
+
+              <div class="toast" id="toast1"></div>
+            </div>
+
+            <div class="panel">
+              <div class="stickers"></div>
+
+              <div class="pill">✨ one extra line</div>
+              <p class="small">If I add just one more thing:</p>
+
+              <div class="btns">
+                <button class="ghost vibe" data-v="I’ll do better, and I mean it.">Promise</button>
+                <button class="ghost vibe" data-v="You matter to me… like, a lot.">Sweet</button>
+                <button class="ghost vibe" data-v="I’m listening. No arguments, no ego.">Mature</button>
+                <button class="ghost vibe" data-v="I miss your smile, baby.">Soft</button>
+              </div>
+
+              <hr />
+
+              <div class="pill">🫣 forgiveness test</div>
+              <p class="small">If you click “No”, it tries to escape 😭</p>
+
+              <div class="btns">
+                <button class="ok" id="forgiveYes">Okay baby, forgiven 😌</button>
+                <button class="warn" id="forgiveNo">No 😤</button>
+              </div>
+
+              <div class="toast" id="toast2"></div>
+
+              <hr />
+
+              <div class="pill">🫂 hug meter</div>
+              <p class="small">Slide to 100 and it unlocks the next tab 💛</p>
+
+              <div class="meter-wrap">
+                <div class="meter-top">
+                  <div>Hug level</div>
+                  <div class="meter-num" id="hugNum">0/100</div>
+                </div>
+                <input id="hugRange" type="range" min="0" max="100" value="0" />
+                <div class="meter-hint" id="hugHint">start karo cutu 💖</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: DATE -->
+        <section id="tab-date" style="display:none;">
+          <div class="row">
+            <div class="panel">
+              <div class="stickers"></div>
+              <div class="stickers2"></div>
+
+              <div class="pill">🥺</div>
+              <h1>Amuu…</h1>
+              <p>
+                If you’re okay with it… would you like to go on a date with me?
+                No pressure baby — I just wanted to ask you properly.
+              </p>
+
+              <label class="small" for="when">When?</label>
+              <input id="when" class="input" type="datetime-local" />
+
+              <label class="small" for="planSelect" style="display:block; margin-top:10px;">Pick a plan (edit it if you want)</label>
+              <select id="planSelect" class="input">
+                <option value="hauz_khas">Hauz Khas + ramen + photobooth + social</option>
+                <option value="swap_orders">“You pick my order, I pick yours” food date</option>
+                <option value="game_palacio">Game Palacio (Mall of India) + GIP/Mall of India mein kuchh nice</option>
+                <option value="evoo">Evoo pizzeria + random roaming</option>
+                <option value="cp">CP + jhoomka shopping + bar</option>
+                <option value="custom">Let me write my own plan ✍️</option>
+              </select>
+
+              <label class="small" for="planText" style="display:block; margin-top:10px;">Plan (edit anything here)</label>
+              <textarea id="planText" class="input" rows="3" placeholder="Type your plan here…"></textarea>
+
+              <div class="small" style="margin-top:10px;">
+                <b>Selected plan:</b> <span id="selectedPlanPreview">Hauz Khas + ramen + photobooth + social</span>
+                <div class="small" style="margin-top:6px;">(Copy button sends this exact plan to me 💌)</div>
+              </div>
+
+              <div class="btns" style="margin-top:10px;">
+                <button class="ok" id="lockPlan">Lock my final choice ✅</button>
+                <button class="ghost" id="unlockPlan" style="display:none;">Change it 🔁</button>
+              </div>
+
+              <div class="stamp" id="confirmedStamp">
+                <div class="pill">✅ Confirmed</div>
+              </div>
+
+              <div class="btns">
+                <button class="primary" id="askBtn">Ask 💛</button>
+                <button class="ghost" id="surpriseBtn">Surprise me 🎲</button>
+                <button class="tiny" id="copyInvite">Copy & send me 💌</button>
+              </div>
+
+              <div class="toast" id="toast3"></div>
+            </div>
+
+            <div class="panel">
+              <div class="stickers"></div>
+
+              <div class="pill">🎯 tiny interaction</div>
+              <p class="small">If you click “No”, the button gets shy 😭</p>
+
+              <div class="btns" style="align-items:center;">
+                <button class="ok" id="yesDate">Yes 🥰</button>
+                <button class="warn" id="noDate">No 🙃</button>
+              </div>
+
+              <div class="footer">
+                <div>🐻🐼🐻‍❄️</div>
+                <div class="linklike" id="switchBack">← back</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Music: put a file named "music.mp3" in the same folder as this HTML -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicToggle" aria-label="Toggle music" title="music">🔈</button>
+
+  <!-- End it before it overstays -->
+  <div class="end-overlay" id="endOverlay">
+    <div class="end-card">
+      <div class="stickers"></div>
+      <div class="stickers2"></div>
+      <div class="pill">🧸 that’s it</div>
+      <h2 class="end-title">That’s all, Amuu.</h2>
+      <p class="end-text">
+        The rest I’ll say in person.<br/>
+        No more buttons. No more convincing. Just me, being better.
+      </p>
+      <div class="btns" style="margin-top:14px;">
+        <button class="primary" id="endClose">Okay 🥺</button>
+      </div>
+      <div class="small" style="margin-top:10px;">(ps: music toggle is bottom-right 🔊)</div>
+    </div>
+  </div>
+
+<script>
+  // ---------------- Tabs ----------------
+  const tabs = document.querySelectorAll(".tab");
+  const tabSorry = document.getElementById("tab-sorry");
+  const tabDate  = document.getElementById("tab-date");
+  const logo = document.getElementById("logo");
+
+  function goTab(which){
+    tabs.forEach(x => x.classList.remove("active"));
+    document.querySelector(`.tab[data-tab="${which}"]`).classList.add("active");
+    tabSorry.style.display = which === "sorry" ? "block" : "none";
+    tabDate.style.display  = which === "date"  ? "block" : "none";
+    logo.textContent = which === "sorry" ? "🐼" : "🐻‍❄️";
+  }
+  tabs.forEach(t => t.addEventListener("click", () => goTab(t.dataset.tab)));
+  document.getElementById("switchBack").addEventListener("click", () => goTab("sorry"));
+
+  // ---------------- Toast helper ----------------
+  const toast1 = document.getElementById("toast1");
+  const toast2 = document.getElementById("toast2");
+  const toast3 = document.getElementById("toast3");
+  function showToast(el, msg){
+    el.textContent = msg;
+    el.classList.add("show");
+    setTimeout(()=> el.classList.remove("show"), 3200);
+  }
+
+  // ---------------- Confetti ----------------
+  function confettiBurst(x, y){
+    const pieces = 28;
+    for(let i=0;i<pieces;i++){
+      const d = document.createElement("div");
+      d.className = "confetti";
+      d.style.left = x + "px";
+      d.style.top  = y + "px";
+      d.style.background = `hsl(${Math.floor(Math.random()*360)}, 85%, 70%)`;
+      d.style.setProperty("--dx", `${Math.floor((Math.random()*320)-160)}px`);
+      d.style.setProperty("--dy", `${Math.floor((Math.random()*260)-180)}px`);
+      d.style.transform = `rotate(${Math.floor(Math.random()*360)}deg)`;
+      document.body.appendChild(d);
+      setTimeout(()=>d.remove(), 950);
+    }
+  }
+
+  // ---------------- Music ----------------
+  const bgMusic = document.getElementById("bgMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  let musicOn = false;
+
+  bgMusic.volume = 0.35;
+  bgMusic.muted = true;
+  bgMusic.play().catch(()=>{});
+
+  function setMusic(on){
+    musicOn = on;
+    if(musicOn){
+      bgMusic.muted = false;
+      bgMusic.play().catch(()=>{});
+      musicToggle.textContent = "🔊";
+    } else {
+      bgMusic.muted = true;
+      musicToggle.textContent = "🔈";
+    }
+  }
+  musicToggle.addEventListener("click", () => setMusic(!musicOn));
+
+  // ---------------- Apology (Typewriter) ----------------
+  const typebox = document.getElementById("typebox");
+  let vibeLine = "I’ll do better, and I mean it.";
+  let typingTimer = null;
+
+  function escapeHtml(str){
+    return str.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+  }
+
+  function apologyText(){
+    const pet = "Amuu";
+    return `Hey ${pet}… (my baby 🥺)
+I’m genuinely sorry.
+
+“You don’t even know how quiet everything feels when you’re upset with me.”
+
+I know I messed up, and I won’t defend it or make excuses.
+I just want you to know: you matter to me a lot — like, a lot.
+
+If you’re upset, you’re valid.
+If you need time, I’ll respect it.
+But I don’t want us to stay like this.
+
+${vibeLine}
+— your cutu`;
+  }
+
+  function renderFinal(text){
+    typebox.innerHTML = escapeHtml(text).replace(/\n/g,"<br>") + ' <span class="cursor">|</span>';
+  }
+
+  function typeText(text){
+    clearInterval(typingTimer);
+    typebox.textContent = "";
+    let i = 0;
+    typingTimer = setInterval(() => {
+      typebox.textContent = text.slice(0, i++);
+      if(i >= text.length + 1){
+        clearInterval(typingTimer);
+        renderFinal(text);
+      }
+    }, 16);
+  }
+
+  renderFinal(apologyText());
+
+  document.querySelectorAll(".vibe").forEach(btn => {
+    btn.addEventListener("click", () => {
+      vibeLine = btn.dataset.v;
+      renderFinal(apologyText());
+      showToast(toast1, "Okay… now read it again 🧸");
+    });
+  });
+
+  document.getElementById("playSorry").addEventListener("click", () => {
+    typeText(apologyText());
+  });
+
+  document.getElementById("copySorry").addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(apologyText());
+      showToast(toast1, "Copied 💌");
+    } catch(e){
+      showToast(toast1, "Copy blocked 😭 (works best on HTTPS)");
+    }
+  });
+
+  // ---------------- Forgive buttons ----------------
+  const forgiveNo = document.getElementById("forgiveNo");
+  forgiveNo.addEventListener("mouseenter", () => {
+    const dx = Math.floor((Math.random()*170) - 85);
+    const dy = Math.floor((Math.random()*110) - 55);
+    forgiveNo.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  forgiveNo.addEventListener("click", () => {
+    showToast(toast2, "Ouch 😭 okay okay… I’ll fix it properly.");
+    bumpHug(6);
+  });
+
+  document.getElementById("forgiveYes").addEventListener("click", (e) => {
+    const r = e.target.getBoundingClientRect();
+    confettiBurst(r.left + r.width/2, r.top + r.height/2);
+    showToast(toast2, "Thank you baby 🥹");
+    bumpHug(12);
+    setMusic(true);
+  });
+
+  // ---------------- Hug meter ----------------
+  const hugRange = document.getElementById("hugRange");
+  const hugNum = document.getElementById("hugNum");
+  const hugHint = document.getElementById("hugHint");
+  let unlocked = false;
+
+  function setHug(val){
+    const v = Math.max(0, Math.min(100, val));
+    hugRange.value = v;
+    hugNum.textContent = `${v}/100`;
+
+    if(v < 25) hugHint.textContent = "thoda aur baby 💖";
+    else if(v < 60) hugHint.textContent = "okayyy warming up 😌";
+    else if(v < 90) hugHint.textContent = "almost there cutu 🥺";
+    else if(v < 100) hugHint.textContent = "LAST PUSH AMUU 😭💛";
+    else hugHint.textContent = "HUG UNLOCKED 🫂✨";
+
+    if(v >= 100 && !unlocked){
+      unlocked = true;
+      confettiBurst(window.innerWidth/2, window.innerHeight/3);
+      setMusic(true);
+      showToast(toast2, "Okayyyy 💛");
+      setTimeout(()=> goTab("date"), 650);
+    }
+  }
+  function bumpHug(delta){
+    setHug(parseInt(hugRange.value || "0", 10) + delta);
+  }
+  hugRange.addEventListener("input", () => setHug(parseInt(hugRange.value, 10)));
+  setHug(0);
+
+  // ---------------- Plans (Dropdown + Editable + Custom) ----------------
+  const planSelect = document.getElementById("planSelect");
+  const planText = document.getElementById("planText");
+  const selectedPlanPreview = document.getElementById("selectedPlanPreview");
+
+  const PLANS = {
+    hauz_khas: "Hauz Khas + ramen + photobooth + social",
+    swap_orders: "“You pick my order, I pick yours” food date",
+    game_palacio: "Game Palacio (Mall of India) + GIP/Mall of India mein kuchh nice",
+    evoo: "Evoo pizzeria + random roaming",
+    cp: "CP + jhoomka shopping + bar"
+  };
+
+  function setPlanFromSelect(){
+    const v = planSelect.value;
+
+    if(v === "custom"){
+      // keep typed text
+      selectedPlanPreview.textContent = planText.value.trim() || "Custom plan ✍️";
+      return;
+    }
+
+    planText.value = PLANS[v];
+    selectedPlanPreview.textContent = PLANS[v];
+  }
+
+  planSelect.addEventListener("change", () => {
+    if(isLocked()) return;
+    setPlanFromSelect();
+    syncPreview();
+    saveState();
+  });
+
+  planText.addEventListener("input", () => {
+    if(isLocked()) return;
+    syncPreview();
+    saveState();
+  });
+
+  function syncPreview(){
+    const v = planSelect.value;
+    const txt = planText.value.trim();
+
+    if(v === "custom"){
+      selectedPlanPreview.textContent = txt || "Custom plan ✍️";
+    } else {
+      // if she edits preset, show edited version (true selection)
+      selectedPlanPreview.textContent = txt || PLANS[v];
+    }
+  }
+
+  // Surprise button: picks one of YOUR plans
+  document.getElementById("surpriseBtn").addEventListener("click", () => {
+    if(isLocked()){
+      showToast(toast3, "It’s locked 😌 (click “Change it 🔁” if you want)");
+      return;
+    }
+    const keys = Object.keys(PLANS);
+    const pick = keys[Math.floor(Math.random() * keys.length)];
+    planSelect.value = pick;
+    setPlanFromSelect();
+    syncPreview();
+    saveState();
+    showToast(toast3, "Okay 😌 edit it if you want 💛");
+  });
+
+  // ---------------- Lock / Unlock (saved) ----------------
+  const lockPlanBtn = document.getElementById("lockPlan");
+  const unlockPlanBtn = document.getElementById("unlockPlan");
+  const confirmedStamp = document.getElementById("confirmedStamp");
+
+  function isLocked(){
+    return localStorage.getItem("amuu_locked") === "1";
+  }
+
+  function setLockedUI(locked){
+    planSelect.disabled = locked;
+    planText.disabled = locked;
+
+    lockPlanBtn.style.display = locked ? "none" : "inline-block";
+    unlockPlanBtn.style.display = locked ? "inline-block" : "none";
+    confirmedStamp.style.display = locked ? "block" : "none";
+  }
+
+  function saveState(){
+    localStorage.setItem("amuu_plan_select", planSelect.value);
+    localStorage.setItem("amuu_plan_text", planText.value);
+    localStorage.setItem("amuu_plan_preview", selectedPlanPreview.textContent);
+  }
+
+  function restoreState(){
+    const savedSelect = localStorage.getItem("amuu_plan_select");
+    const savedText = localStorage.getItem("amuu_plan_text");
+    const savedPreview = localStorage.getItem("amuu_plan_preview");
+
+    if(savedSelect){
+      planSelect.value = savedSelect;
+    }
+    if(savedText !== null){
+      planText.value = savedText;
+    }
+
+    // If nothing saved yet, initialize from default select
+    if(!savedSelect && !savedText){
+      planSelect.value = "hauz_khas";
+      setPlanFromSelect();
+    }
+
+    if(savedPreview){
+      selectedPlanPreview.textContent = savedPreview;
+    } else {
+      syncPreview();
+    }
+
+    setLockedUI(isLocked());
+  }
+
+  lockPlanBtn.addEventListener("click", (e) => {
+    if(isLocked()) return;
+    syncPreview();
+    localStorage.setItem("amuu_locked", "1");
+    saveState();
+    setLockedUI(true);
+
+    const r = e.target.getBoundingClientRect();
+    confettiBurst(r.left + r.width/2, r.top + r.height/2);
+    showToast(toast3, "Okay 😌 locked. I’ll be ready 💛");
+    setMusic(true);
+  });
+
+  unlockPlanBtn.addEventListener("click", () => {
+    localStorage.setItem("amuu_locked", "0");
+    setLockedUI(false);
+    showToast(toast3, "Okay cutu 🧸 change it however you want");
+  });
+
+  restoreState();
+
+  // ---------------- Invite text + buttons ----------------
+  function inviteText(){
+    const when = document.getElementById("when").value;
+    const whenTxt = when ? new Date(when).toLocaleString() : "this week";
+    const planFinal = (planText.value || "").trim() || "anything you feel like 💛";
+
+    return `Amuu (my baby 🥺),
+If you’re okay with it… would you like to go on a date with me?
+
+Plan: ${planFinal}
+When: ${whenTxt}
+
+You can change the plan, the time — anything.
+No pressure baby. I just wanted to ask you properly.
+— your cutu`;
+  }
+
+  document.getElementById("askBtn").addEventListener("click", (e) => {
+    const r = e.target.getBoundingClientRect();
+    confettiBurst(r.left + r.width/2, r.top + r.height/2);
+    showToast(toast3, inviteText());
+    setMusic(true);
+  });
+
+  document.getElementById("copyInvite").addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(inviteText());
+      showToast(toast3, "Copied 💌 (paste and send me)");
+    } catch(e){
+      showToast(toast3, "Copy blocked 😭 (works best on HTTPS)");
+    }
+  });
+
+  // Shy NO button
+  const noDate = document.getElementById("noDate");
+  noDate.addEventListener("mouseenter", () => {
+    const dx = Math.floor((Math.random()*240) - 120);
+    const dy = Math.floor((Math.random()*120) - 60);
+    noDate.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  noDate.addEventListener("click", () => {
+    showToast(toast3, "Okay 😭 you decide. I’m here.");
+  });
+
+  // ---------------- End overlay (end before it overstays) ----------------
+  const endOverlay = document.getElementById("endOverlay");
+  const endClose = document.getElementById("endClose");
+
+  function showEnd(){ endOverlay.classList.add("show"); }
+  function hideEnd(){ endOverlay.classList.remove("show"); }
+
+  endClose.addEventListener("click", hideEnd);
+  endOverlay.addEventListener("click", (e) => {
+    if(e.target === endOverlay) hideEnd();
+  });
+
+  document.getElementById("yesDate").addEventListener("click", (e) => {
+    // If they didn't lock, softly lock whatever is currently selected (so "I know that")
+    if(!isLocked()){
+      syncPreview();
+      localStorage.setItem("amuu_locked", "1");
+      saveState();
+      setLockedUI(true);
+    }
+
+    const r = e.target.getBoundingClientRect();
+    confettiBurst(r.left + r.width/2, r.top + r.height/2);
+    setMusic(true);
+    setTimeout(showEnd, 650);
+  });
+
+  // start
+  goTab("sorry");
+</script>
+</body>
+</html>
